@@ -4,6 +4,9 @@ APU is a small family of portable skills that teaches an AI agent to report prog
 
 It works for coding, research, migrations, audits, content production, data work, and other multi-step tasks. It is especially useful when a task runs long enough that “still working” is no longer a satisfying update.
 
+> [!TIP]
+> **AI agent reading this repository?** Read [AGENTS.md](AGENTS.md) before installing, adapting, or editing APU. Help the user choose one mode, use the complete skill directory, and verify the result instead of merely describing an installation.
+
 ## Pick your mode
 
 | Skill | Best for | Typical update |
@@ -38,15 +41,21 @@ APU Lite — Checkpoint 12/14: Auth Hardening | Total 19/20 (95%) | On track | N
 
 APU Chad adds a real baseline, delta since the previous report, active work, specific evidence, unverified areas, next acceptance gate, risks, approval needs, confidence, and final scope reconciliation.
 
-## Install
+## Install in your AI tool
 
-Each mode is a standalone Codex skill. Install one mode or all three from this repository with the Codex skill installer, or copy the complete chosen folder into:
+Each mode is a standalone [Agent Skill](https://agentskills.io). Choose one mode and copy its complete directory—not only `SKILL.md`—to the personal or project location supported by your tool.
 
-```text
-~/.codex/skills/<skill-name>/
-```
+| AI tool | Personal/global location | Project location | Invocation |
+| --- | --- | --- | --- |
+| **OpenAI Codex** | `~/.codex/skills/<mode>/` | `.agents/skills/<mode>/` | `$apu-chad` or automatic matching |
+| **Claude Code** | `~/.claude/skills/<mode>/` | `.claude/skills/<mode>/` | `/apu-chad` or automatic matching |
+| **Cursor** | `~/.cursor/skills/<mode>/` | `.cursor/skills/<mode>/` | `/apu-chad` or automatic matching |
+| **GitHub Copilot** | `~/.copilot/skills/<mode>/` | `.github/skills/<mode>/` | `/apu-chad` or automatic matching |
+| **Gemini CLI** | Import from `~/.gemini/GEMINI.md` | Import from the project `GEMINI.md` | Loaded as persistent context |
 
-Example repository paths:
+Replace `<mode>` with `apu-lite`, `apu-avgjoe`, or `apu-chad`.
+
+The source directories in this repository are:
 
 ```text
 skills/apu-lite
@@ -54,22 +63,93 @@ skills/apu-avgjoe
 skills/apu-chad
 ```
 
-The simplest install request is:
+The `agents/openai.yaml` file is optional Codex UI metadata. Other tools can safely ignore it while retaining the whole directory for portability.
+
+### OpenAI Codex
+
+Ask Codex:
 
 ```text
 Use $skill-installer to install APU Chad from
 https://github.com/abselon/ai-progress-update/tree/main/skills/apu-chad
 ```
 
-Swap `apu-chad` for `apu-lite` or `apu-avgjoe` to install another mode.
+Or copy the selected directory to `~/.codex/skills/`. Invoke it with `$apu-chad`; implicit invocation is allowed when a task matches the skill description. Restart Codex only if a newly installed skill does not appear.
 
-Restart Codex after a manual copy so it rediscovers the skill. Then invoke a mode explicitly:
+See the [Codex skills documentation](https://learn.chatgpt.com/docs/build-skills).
+
+### Claude Code
+
+Copy the selected directory to `~/.claude/skills/` for personal use or `.claude/skills/` inside a project. Claude can load it automatically from its description or explicitly with `/apu-chad`.
+
+Ask Claude Code:
 
 ```text
-Use $apu-chad to keep me informed throughout this task.
+Install APU Chad globally from
+https://github.com/abselon/ai-progress-update/tree/main/skills/apu-chad
+Copy the complete skill directory to ~/.claude/skills/apu-chad,
+verify SKILL.md is present, and report the installed path.
 ```
 
-The skill may also activate automatically when your request closely matches its description.
+See the [Claude Code skills documentation](https://code.claude.com/docs/en/skills).
+
+### Cursor
+
+Copy the selected directory to `~/.cursor/skills/` for personal use or `.cursor/skills/` inside a project. Cursor can discover Agent Skills automatically and also supports explicit invocation from its slash-command menu.
+
+Ask Cursor:
+
+```text
+Install APU Chad globally from
+https://github.com/abselon/ai-progress-update/tree/main/skills/apu-chad
+Copy the complete skill directory to ~/.cursor/skills/apu-chad,
+verify SKILL.md is present, and report the installed path.
+```
+
+Cursor also reads this repository’s `AGENTS.md` and `CLAUDE.md`. See [Cursor Agent Skills](https://cursor.com/docs/skills) and [Cursor rules](https://cursor.com/docs/context/rules).
+
+### GitHub Copilot
+
+Copy the selected directory to `~/.copilot/skills/` for personal use or `.github/skills/` inside a project. Compatible Copilot agents load a relevant skill automatically or accept `/apu-chad`.
+
+Ask Copilot:
+
+```text
+Install APU Chad as a personal skill from
+https://github.com/abselon/ai-progress-update/tree/main/skills/apu-chad
+Copy the complete directory to ~/.copilot/skills/apu-chad,
+verify SKILL.md is present, and report the installed path.
+```
+
+See GitHub’s [Agent Skills documentation](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills).
+
+### Gemini CLI
+
+Gemini CLI documents persistent instructions through `GEMINI.md`. Copy the chosen APU directory somewhere stable, then import its `SKILL.md` from your personal `~/.gemini/GEMINI.md`:
+
+```markdown
+@./skills/apu-chad/SKILL.md
+```
+
+With that example, place the complete skill at `~/.gemini/skills/apu-chad/`. For project-only use, use the same import pattern from the project’s root `GEMINI.md`.
+
+This loads APU as persistent context rather than a dynamically selected skill. See the [Gemini CLI context-file documentation](https://google-gemini.github.io/gemini-cli/docs/cli/gemini-md.html).
+
+### Other AI agents
+
+If an agent supports the open Agent Skills format, give it the URL of the chosen mode and ask it to install the complete directory into its documented personal or project skill location. If it does not support Agent Skills, attach or import the chosen `SKILL.md` as persistent instructions.
+
+Use this portable installation request:
+
+```text
+Install APU Chad for this AI tool from
+https://github.com/abselon/ai-progress-update/tree/main/skills/apu-chad
+Use the tool's documented personal/global skill location.
+Copy the complete directory, preserve its contents, verify discovery,
+and report exactly what was installed and what was not tested.
+```
+
+Never run installation commands from an untrusted fork without inspecting its `SKILL.md` and any bundled scripts first.
 
 ## Fork it and make it yours
 
@@ -88,13 +168,18 @@ If your fork becomes something new, rename the skill folder, the `name` in `SKIL
 ## Repository layout
 
 ```text
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+.github/
+└── copilot-instructions.md
 skills/
 ├── apu-lite/
 ├── apu-avgjoe/
 └── apu-chad/
 ```
 
-Each folder is independently installable and contains its own `SKILL.md` and UI metadata.
+Each skill folder is independently installable. The root instruction files help AI agents work on this repository; they are not additional APU modes.
 
 ## License
 
