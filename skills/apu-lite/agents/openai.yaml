@@ -1,0 +1,4 @@
+interface:
+  display_name: "APU Lite"
+  short_description: "Minimal, truthful progress updates at a glance"
+  default_prompt: "Use $apu-lite to give me a compact, truthful progress update."

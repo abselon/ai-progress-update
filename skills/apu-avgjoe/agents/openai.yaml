@@ -1,0 +1,4 @@
+interface:
+  display_name: "APU AvgJoe"
+  short_description: "Balanced updates with next steps and blockers"
+  default_prompt: "Use $apu-avgjoe to report progress with completed work, next steps, and blockers."
