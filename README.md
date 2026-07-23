@@ -54,6 +54,15 @@ skills/apu-avgjoe
 skills/apu-chad
 ```
 
+The simplest install request is:
+
+```text
+Use $skill-installer to install APU Chad from
+https://github.com/abselon/ai-progress-update/tree/main/skills/apu-chad
+```
+
+Swap `apu-chad` for `apu-lite` or `apu-avgjoe` to install another mode.
+
 Restart Codex after a manual copy so it rediscovers the skill. Then invoke a mode explicitly:
 
 ```text
